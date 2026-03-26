@@ -1,4 +1,6 @@
-# FlexQL Benchmark
+# FlexQL Benchmark Unit Tests
+
+This repository is for demo purposes and shows how the benchmark script can be integrated with a FlexQL project to run unit tests and performance checks in a repeatable workflow. You have to copy `benchmark_flexql.cpp` code in your project.
 
 This project contains:
 - `server`: a TCP SQL server backed by SQLite (`flexql_server.cpp`)
@@ -77,4 +79,3 @@ sh compile.sh
 - If `./benchmark` exits with `Cannot open FlexQL`, make sure `./server` is running.
 - `flexql_server.cpp` recreates `flexql.db` on each server start.
 - The server listens on `127.0.0.1:9000`.
-# FlexQL_Benchmark_Unit_Tests
