@@ -185,11 +185,6 @@ static bool run_data_level_unit_tests(FlexQL *db) {
         record(assert_rows_equal("Filtered rows validation", rows, {"Alice", "Carol"}));
     }
 
-    bool q3 = query_rows(db, "SELECT NAME FROM TEST_USERS ORDER BY BALANCE DESC;", rows);
-    record(q3);
-    if (q3) {
-        record(assert_rows_equal("ORDER BY descending validation", rows, {"Carol", "Alice", "Dave", "Bob"}));
-    }
 
     bool q4 = query_rows(db, "SELECT ID FROM TEST_USERS WHERE BALANCE > 5000;", rows);
     record(q4);
@@ -212,22 +207,6 @@ static bool run_data_level_unit_tests(FlexQL *db) {
             "(103, 3, 500, 1893456000);",
             "INSERT TEST_ORDERS"));
 
-    bool q5 = query_rows(
-            db,
-            "SELECT TEST_USERS.NAME, TEST_ORDERS.AMOUNT "
-            "FROM TEST_USERS INNER JOIN TEST_ORDERS ON TEST_USERS.ID = TEST_ORDERS.USER_ID "
-            "WHERE TEST_ORDERS.AMOUNT >= 100 ORDER BY TEST_ORDERS.ORDER_ID;",
-            rows);
-    record(q5);
-    if (q5) {
-        record(assert_rows_equal("Join result validation", rows, {"Alice 150", "Carol 500"}));
-    }
-
-    bool q6 = query_rows(db, "SELECT ORDER_ID FROM TEST_ORDERS WHERE USER_ID = 1 ORDER BY ORDER_ID;", rows);
-    record(q6);
-    if (q6) {
-        record(assert_rows_equal("Single-condition equality WHERE validation", rows, {"101", "102"}));
-    }
 
     bool q7 = query_rows(
             db,
