@@ -15,9 +15,18 @@ static int callback(void *client_socket, int argc, char **argv, char **azColName
     int sock = *(int*)client_socket;
 
     std::string row = "ROW ";
+    row += std::to_string(argc);
+    row += " ";
     for (int i = 0; i < argc; i++) {
-        row += (argv[i] ? argv[i] : "NULL");
-        if (i != argc - 1) row += " ";
+        const char *name = azColName && azColName[i] ? azColName[i] : "";
+        const char *value = argv[i] ? argv[i] : "NULL";
+
+        row += std::to_string(std::strlen(name));
+        row += ":";
+        row.append(name);
+        row += std::to_string(std::strlen(value));
+        row += ":";
+        row.append(value);
     }
     row += "\n";
 
