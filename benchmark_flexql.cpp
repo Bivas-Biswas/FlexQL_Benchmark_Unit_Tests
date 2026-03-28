@@ -192,7 +192,6 @@ static bool run_data_level_unit_tests(FlexQL *db) {
         record(assert_rows_equal("Filtered rows validation", rows, {"Alice", "Carol"}));
     }
 
-
     bool q4 = query_rows(db, "SELECT ID FROM TEST_USERS WHERE BALANCE > 5000;", rows);
     record(q4);
     if (q4) {
@@ -203,8 +202,6 @@ static bool run_data_level_unit_tests(FlexQL *db) {
             db,
             "CREATE TABLE TEST_ORDERS(ORDER_ID DECIMAL, USER_ID DECIMAL, AMOUNT DECIMAL, EXPIRES_AT DECIMAL);",
             "CREATE TABLE TEST_ORDERS"));
-
-    record(run_exec(db, "DELETE FROM TEST_ORDERS;", "RESET TEST_ORDERS"));
 
     record(run_exec(
             db,
